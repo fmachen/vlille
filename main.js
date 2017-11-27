@@ -1,5 +1,5 @@
 class Station {
-    constructor(){
+    constructor() {
         this.id;
         this.name;
         this.state;
@@ -15,7 +15,7 @@ class StationManager {
     static loadFromVlilleApi(json) {
         const station = new Station();
         station.id = json.fields.libelle;
-        station.name = json.fields.nom.replace(json.fields.libelle,'').replace('(CB)','').trim();
+        station.name = json.fields.nom.replace(/^\d+ /, '').replace(' (CB)', '');
         station.state = json.fields.etat + '/' + json.fields.etatConnexion;
         station.adress = json.fields.adresse + ' ' + json.fields.commune;
         station.nbBikes = json.fields.nbVelosDispo;
@@ -36,7 +36,10 @@ function updateVlilleStations() {
         .then(response => response.json())
         .then((json) => {
             vlille.nbStations = json.nhits;
-            vlille.stations = json.records.map(record => StationManager.loadFromVlilleApi(record));
+            vlille.stations = {};
+            json.records.forEach(record => {
+                vlille.stations[record.fields.libelle] = StationManager.loadFromVlilleApi(record)
+            });
             console.log(vlille.stations);
         });
 }
