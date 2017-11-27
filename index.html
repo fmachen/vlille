@@ -34,14 +34,14 @@
                     <th>GPS</th>
                 </tr>
                 <tr v-for="station in vlille.stations">
-                    <td v-text="station.fields.libelle"></td>
-                    <td v-text="station.fields.nom"></td>
-                    <td>{{ station.fields.etat }}/{{ station.fields.etatConnexion }}</td>
-                    <td>{{ station.fields.adresse }} {{ station.fields.commune }}</td>
-                    <td v-text="station.fields.nbVelosDispo"></td>
-                    <td v-text="station.fields.nbPlacesDispo"></td>
-                    <td v-text="station.fields.type"></td>
-                    <td>{{ station.fields.geo[0] }} - {{ station.fields.geo[1] }}</td>
+                    <td v-text="station.id"></td>
+                    <td v-text="station.name"></td>
+                    <td v-text="station.state"></td>
+                    <td v-text="station.adress"></td>
+                    <td v-text="station.nbBikes"></td>
+                    <td v-text="station.nbSlots"></td>
+                    <td v-text="station.acceptCb"></td>
+                    <td>{{ station.gps[0] }} - {{ station.gps[1] }}</td>
                 </tr>
             </table>
         </section>
