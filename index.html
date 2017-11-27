@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Vlille with vuejs</title>
+
+    <meta name="description" content="Vlille with vuejs">
+    <meta name="author" content="fmachen">
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="main.css" media="screen">
+
+    <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+    <main>
+        <nav>
+        </nav>
+
+        <section>
+            <h1>Vlille</h1>
+            <table>
+                <caption>{{ vlille.nbStations }} stations</caption>
+                <tr>
+                    <th>id</th>
+                    <th>nom</th>
+                    <th>etat</th>
+                    <th>adresse</th>
+                    <th>nbVelosDispo</th>
+                    <th>nbPlacesDispo</th>
+                    <th>CB</th>
+                    <th>GPS</th>
+                </tr>
+                <tr v-for="station in vlille.stations">
+                    <td v-text="station.fields.libelle"></td>
+                    <td v-text="station.fields.nom"></td>
+                    <td>{{ station.fields.etat }}/{{ station.fields.etatConnexion }}</td>
+                    <td>{{ station.fields.adresse }} {{ station.fields.commune }}</td>
+                    <td v-text="station.fields.nbVelosDispo"></td>
+                    <td v-text="station.fields.nbPlacesDispo"></td>
+                    <td v-text="station.fields.type"></td>
+                    <td>{{ station.fields.geo[0] }} - {{ station.fields.geo[1] }}</td>
+                </tr>
+            </table>
+        </section>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
