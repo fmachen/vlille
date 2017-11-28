@@ -50,6 +50,26 @@ let intervalId = setInterval(updateVlilleStations, 15000);
 const app = new Vue({
     el: 'main',
     data: {
-        vlille
+        vlille,
+        search: ''
     },
+    computed: {
+        filteredStations: function () {
+            re = new RegExp(this.search, 'i');
+            filtered = [];
+            for (let station in this.vlille.stations) {
+                let searchable = this.vlille.stations[station].adress + ' ' + this.vlille.stations[station].name;
+                if (!this.search || searchable.match(re)) {
+                    filtered.push(this.vlille.stations[station])
+                }
+            }
+            return filtered;
+        }
+    },
+    methods: {
+        applyFilter: function (item) {
+            console.log(item)
+            return this
+        }
+    }
 });

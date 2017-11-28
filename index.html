@@ -21,8 +21,9 @@
 
         <section>
             <h1>Vlille</h1>
+            <input type="search" v-model="search"> recherche en cours: {{ search }}
             <table>
-                <caption>{{ vlille.nbStations }} stations</caption>
+                <caption>{{ filteredStations.length }} stations</caption>
                 <tr>
                     <th>id</th>
                     <th>nom</th>
@@ -33,7 +34,7 @@
                     <th>CB</th>
                     <th>GPS</th>
                 </tr>
-                <tr v-for="station in vlille.stations">
+                <tr v-for="station in filteredStations">
                     <td v-text="station.id"></td>
                     <td v-text="station.name"></td>
                     <td v-text="station.state"></td>
