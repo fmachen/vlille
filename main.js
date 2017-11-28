@@ -28,7 +28,7 @@ class StationManager {
 
 let vlille = {
     nbStations: 0,
-    stations: {}
+    stations: []
 };
 
 function updateVlilleStations() {
@@ -36,9 +36,9 @@ function updateVlilleStations() {
         .then(response => response.json())
         .then((json) => {
             vlille.nbStations = json.nhits;
-            vlille.stations = {};
+            vlille.stations = [];
             json.records.forEach(record => {
-                vlille.stations[record.fields.libelle] = StationManager.loadFromVlilleApi(record)
+                vlille.stations.push(StationManager.loadFromVlilleApi(record))
             });
             console.log(vlille.stations);
         });
@@ -56,20 +56,10 @@ const app = new Vue({
     computed: {
         filteredStations: function () {
             re = new RegExp(this.search, 'i');
-            filtered = [];
-            for (let station in this.vlille.stations) {
-                let searchable = this.vlille.stations[station].adress + ' ' + this.vlille.stations[station].name;
-                if (!this.search || searchable.match(re)) {
-                    filtered.push(this.vlille.stations[station])
-                }
-            }
-            return filtered;
-        }
-    },
-    methods: {
-        applyFilter: function (item) {
-            console.log(item)
-            return this
+            return this.vlille.stations.filter(function (item) {
+                let searchable = item.adress + ' ' + item.name;
+                return searchable.match(re);
+            });
         }
     }
 });
