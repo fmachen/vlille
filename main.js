@@ -57,6 +57,8 @@ const app = new Vue({
             return this.vlille.stations.filter(function (item) {
                 let searchable = item.adress + ' ' + item.name;
                 return searchable.match(re);
+            }).sort(function (a, b) {
+                return a.id < b.id ? -1 : 1;
             });
         }
     }
