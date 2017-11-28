@@ -9,6 +9,9 @@ class Station {
         this.acceptCb;
         this.gps;
     }
+    isFavorite() {
+        return false;
+    }
 }
 
 class StationManager {
@@ -24,6 +27,16 @@ class StationManager {
         station.gps = json.fields.geo;
         return station;
     }
+    static favoriteToggle(stationId) {
+        let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+        let index = favorites.indexOf(stationId);
+        if (index > -1) {
+            favorites.splice(index, 1);
+        } else {
+            favorites.push(stationId);
+        }
+        localStorage.setItem("favorites", JSON.stringify(favorites.sort((a, b) => a < b ? -1 : 1)));
+    }
 }
 
 let vlille = {
@@ -38,7 +51,6 @@ function updateVlilleStations() {
             json.records.forEach(record => {
                 vlille.stations.push(StationManager.loadFromVlilleApi(record))
             });
-            console.log(vlille.stations);
         });
 }
 
@@ -60,6 +72,11 @@ const app = new Vue({
             }).sort(function (a, b) {
                 return a.id < b.id ? -1 : 1;
             });
+        }
+    },
+    methods: {
+        favoriteToggle: function (stationId) {
+            StationManager.favoriteToggle(stationId);
         }
     }
 });

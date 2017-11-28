@@ -25,6 +25,7 @@
             <table>
                 <caption>{{ filteredStations.length }} stations</caption>
                 <tr>
+                    <th>favorite</th>
                     <th>id</th>
                     <th>nom</th>
                     <th>etat</th>
@@ -35,6 +36,7 @@
                     <th>GPS</th>
                 </tr>
                 <tr v-for="station in filteredStations">
+                    <td v-text="station.isFavorite()" @click="favoriteToggle(station.id)"></td>
                     <td v-text="station.id"></td>
                     <td v-text="station.name"></td>
                     <td v-text="station.state"></td>
