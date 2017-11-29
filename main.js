@@ -10,7 +10,7 @@ class Station {
         this.gps;
     }
     isFavorite() {
-        return false;
+        return StationManager.isFavorite(this.id)
     }
 }
 
@@ -27,15 +27,19 @@ class StationManager {
         station.gps = json.fields.geo;
         return station;
     }
-    static favoriteToggle(stationId) {
+    static favoriteToggle(station) {
         let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-        let index = favorites.indexOf(stationId);
+        let index = favorites.indexOf(station.id);
         if (index > -1) {
             favorites.splice(index, 1);
         } else {
-            favorites.push(stationId);
+            favorites.push(station.id);
         }
         localStorage.setItem("favorites", JSON.stringify(favorites.sort((a, b) => a < b ? -1 : 1)));
+    }
+    static isFavorite(stationId) {
+        let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+        return favorites.indexOf(stationId) > -1;
     }
 }
 
@@ -75,8 +79,9 @@ const app = new Vue({
         }
     },
     methods: {
-        favoriteToggle: function (stationId) {
-            StationManager.favoriteToggle(stationId);
+        favoriteToggle: function (station) {
+            StationManager.favoriteToggle(station);
+            this.$forceUpdate();
         }
     }
 });

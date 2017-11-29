@@ -35,8 +35,8 @@
                     <th>CB</th>
                     <th>GPS</th>
                 </tr>
-                <tr v-for="station in filteredStations">
-                    <td v-text="station.isFavorite()" @click="favoriteToggle(station.id)"></td>
+                <tr v-for="station in filteredStations" :key="station.id">
+                    <td v-text="station.isFavorite()" @click="favoriteToggle(station)"></td>
                     <td v-text="station.id"></td>
                     <td v-text="station.name"></td>
                     <td v-text="station.state"></td>
