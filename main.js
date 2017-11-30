@@ -68,13 +68,18 @@ const app = new Vue({
     el: 'main',
     data: {
         vlille,
-        search: ''
+        filterSearch: '',
+        filterFavorite: false
     },
     computed: {
         filteredStations: function () {
-            re = new RegExp(this.search, 'i');
+            re = new RegExp(this.filterSearch, 'i');
+            requireFavorite = this.filterFavorite;
             return this.vlille.stations.filter(function (item) {
                 let searchable = item.adress + ' ' + item.name;
+                if (requireFavorite && !item.isFavorite()) {
+                    return false;
+                }
                 return searchable.match(re);
             }).sort(function (a, b) {
                 return a.id < b.id ? -1 : 1;

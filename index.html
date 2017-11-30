@@ -18,7 +18,8 @@
     <main>
         <section>
             <h1>Vlille</h1>
-            <input type="search" v-model="search">
+            <input type="search" v-model="filterSearch">
+            <input type="checkbox" v-model="filterFavorite">
             <table>
                 <caption>{{ filteredStations.length }} stations</caption>
                 <tr>
