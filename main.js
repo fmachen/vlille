@@ -61,6 +61,17 @@ function updateVlilleStations() {
 updateVlilleStations();
 let intervalId = setInterval(updateVlilleStations, 15000);
 
+Vue.component('station', {
+    props: ['station'],
+    template: '#tpl-station',
+    methods: {
+        favoriteToggle: function (station) {
+            StationManager.favoriteToggle(station);
+            this.$forceUpdate();
+        }
+    },
+})
+
 const app = new Vue({
     el: 'main',
     data: {
@@ -78,10 +89,4 @@ const app = new Vue({
             });
         }
     },
-    methods: {
-        favoriteToggle: function (station) {
-            StationManager.favoriteToggle(station);
-            this.$forceUpdate();
-        }
-    }
 });

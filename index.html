@@ -16,9 +16,6 @@
 
 <body>
     <main>
-        <nav>
-        </nav>
-
         <section>
             <h1>Vlille</h1>
             <input type="search" v-model="search">
@@ -35,20 +32,24 @@
                     <th>CB</th>
                     <th>GPS</th>
                 </tr>
-                <tr v-for="station in filteredStations" :key="station.id">
-                    <td v-text="station.isFavorite()" @click="favoriteToggle(station)"></td>
-                    <td v-text="station.id"></td>
-                    <td v-text="station.name"></td>
-                    <td v-text="station.state"></td>
-                    <td v-text="station.adress"></td>
-                    <td v-text="station.nbBikes"></td>
-                    <td v-text="station.nbSlots"></td>
-                    <td v-text="station.acceptCb"></td>
-                    <td>{{ station.gps[0] }} - {{ station.gps[1] }}</td>
-                </tr>
+                <tr is="station" v-for="station in filteredStations" :station="station" :key="station.id"></tr>
             </table>
         </section>
     </main>
+
+    <template id="tpl-station">
+        <tr :key="station.id">
+            <td v-text="station.isFavorite()" @click="favoriteToggle(station)"></td>
+            <td v-text="station.id"></td>
+            <td v-text="station.name"></td>
+            <td v-text="station.state"></td>
+            <td v-text="station.adress"></td>
+            <td v-text="station.nbBikes"></td>
+            <td v-text="station.nbSlots"></td>
+            <td v-text="station.acceptCb"></td>
+            <td>{{ station.gps[0] }} - {{ station.gps[1] }}</td>
+        </tr>
+    </template>
 
     <script src="main.js"></script>
 </body>
