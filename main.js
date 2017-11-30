@@ -27,24 +27,17 @@ class StationManager {
         station.gps = json.fields.geo;
         return station;
     }
-    static favoriteToggle(station) {
-        let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-        let index = favorites.indexOf(station.id);
-        if (index > -1) {
-            favorites.splice(index, 1);
-        } else {
-            favorites.push(station.id);
-        }
-        localStorage.setItem("favorites", JSON.stringify(favorites.sort((a, b) => a < b ? -1 : 1)));
+    static saveFavorites() {
+        localStorage.setItem("favorites", JSON.stringify(vlille.favorites.sort((a, b) => a < b ? -1 : 1)));
     }
     static isFavorite(stationId) {
-        let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-        return favorites.indexOf(stationId) > -1;
+        return vlille.favorites.indexOf(stationId) > -1;
     }
 }
 
 let vlille = {
-    stations: []
+    stations: [],
+    favorites: JSON.parse(localStorage.getItem("favorites")) || []
 };
 
 function updateVlilleStations() {
@@ -65,9 +58,8 @@ Vue.component('station', {
     props: ['station'],
     template: '#tpl-station',
     methods: {
-        favoriteToggle: function (station) {
-            StationManager.favoriteToggle(station);
-            this.$forceUpdate();
+        favoriteUpdate: function (station) {
+            this.$emit("favorite-update", { id: station.id });
         }
     },
 })
@@ -87,6 +79,17 @@ const app = new Vue({
             }).sort(function (a, b) {
                 return a.id < b.id ? -1 : 1;
             });
+        }
+    },
+    methods: {
+        favoriteUpdate: function (station) {
+            let index = this.vlille.favorites.indexOf(station.id);
+            if (index > -1) {
+                this.vlille.favorites.splice(index, 1);
+            } else {
+                this.vlille.favorites.push(station.id);
+            }
+            StationManager.saveFavorites();
         }
     },
 });

@@ -32,14 +32,14 @@
                     <th>CB</th>
                     <th>GPS</th>
                 </tr>
-                <tr is="station" v-for="station in filteredStations" :station="station" :key="station.id"></tr>
+                <tr is="station" v-for="station in filteredStations" :station="station" v-on:favorite-update="favoriteUpdate"></tr>
             </table>
         </section>
     </main>
 
     <template id="tpl-station">
         <tr :key="station.id">
-            <td v-text="station.isFavorite()" @click="favoriteToggle(station)"></td>
+            <td v-text="station.isFavorite()" @click="favoriteUpdate(station)"></td>
             <td v-text="station.id"></td>
             <td v-text="station.name"></td>
             <td v-text="station.state"></td>
