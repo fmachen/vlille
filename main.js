@@ -52,7 +52,7 @@ function updateVlilleStations() {
 }
 
 updateVlilleStations();
-let intervalId = setInterval(updateVlilleStations, 15000);
+let intervalId = setInterval(updateVlilleStations, 120000);
 
 Vue.component('station', {
     props: ['station'],
