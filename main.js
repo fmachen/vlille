@@ -64,7 +64,7 @@ Vue.component('station', {
     },
 })
 
-const app = new Vue({
+new Vue({
     el: 'main',
     data: {
         vlille,
