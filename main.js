@@ -76,7 +76,7 @@ new Vue({
             re = new RegExp(this.filterSearch, 'i');
             requireFavorite = this.filterFavorite;
             return this.vlille.stations.filter(function (item) {
-                let searchable = item.adress + ' ' + item.name;
+                let searchable = item.id + ' ' + item.adress + ' ' + item.name;
                 if (requireFavorite && !item.isFavorite()) {
                     return false;
                 }
