@@ -50,7 +50,11 @@
             </td>
             <td v-text="station.id"></td>
             <td v-text="station.name"></td>
-            <td v-text="station.state"></td>
+            <td>
+                <img src="assets/success.png" alt="station ok" title="station ok" width="24px" v-if="station.state == 'EN SERVICE/CONNECTEE'">
+                <img src="assets/repair.png" alt="station repair" title="station repair" width="24px" v-else-if="station.state == 'EN SERVICE/DECONNECTEE'">
+                <img src="assets/security.png" alt="station ok" title="station ok" width="24px" v-else>
+            </td>
             <td v-text="station.adress"></td>
             <td v-text="station.nbBikes"></td>
             <td v-text="station.nbSlots"></td>
