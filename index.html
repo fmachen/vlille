@@ -18,13 +18,18 @@
 
 <body>
     <main>
-        <section>
-            <h1>Vlille</h1>
-            <input type="search" v-model="filterSearch" placeholder="filter">
+        <h1>Vlille</h1>
+        <nav>
+            <label for="filterSearch">
+                <img src="assets/search.png" alt="search" title="filter by id, name or adress" width="48px">
+            </label>
+            <input type="search" v-model="filterSearch" id="filterSearch" placeholder="filter">
             <input type="checkbox" v-model="filterFavorite" id="filterFavorite">
             <label for="filterFavorite">
                 <img src="assets/favorite.png" alt="star" title="filter favorites" width="48px">
             </label>
+        </nav>
+        <section>
             <table>
                 <caption>{{ filteredStations.length }} stations</caption>
                 <tr>

@@ -71,6 +71,16 @@ caption{
     margin: .5rem 0;
 }
 
+/**/
+
+nav {
+    display: flex;
+}
+
+#filterSearch {
+    height: 48px;
+}
+
 #filterFavorite {
     display: none;
 }
