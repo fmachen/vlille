@@ -18,7 +18,9 @@
 
 <body>
     <main>
-        <h1>Vlille</h1>
+        <h1>V'Lille service status
+            <small>{{ filteredStations.length }} stations</small>
+        </h1>
         <nav>
             <label for="filterSearch">
                 <img src="assets/search.png" alt="search" title="filter by id, name or adress" width="48px">
@@ -31,15 +33,14 @@
         </nav>
         <section>
             <table>
-                <caption>{{ filteredStations.length }} stations</caption>
                 <tr>
                     <th></th>
                     <th>id</th>
                     <th>nom</th>
-                    <th>etat</th>
                     <th>adresse</th>
-                    <th>vélos</th>
-                    <th>attaches</th>
+                    <th>dispo</th>
+                    <th>libre</th>
+                    <th>etat</th>
                     <th>CB</th>
                     <th>GPS</th>
                 </tr>
@@ -55,14 +56,14 @@
             </td>
             <td v-text="station.id"></td>
             <td v-text="station.name"></td>
+            <td v-text="station.adress"></td>
+            <td v-text="station.nbBikes"></td>
+            <td v-text="station.nbSlots"></td>
             <td>
                 <img src="assets/success.png" alt="station ok" title="station ok" width="24px" v-if="station.state == 'EN SERVICE/CONNECTEE'">
                 <img src="assets/repair.png" alt="station repair" title="station repair" width="24px" v-else-if="station.state == 'EN SERVICE/DECONNECTEE'">
                 <img src="assets/security.png" alt="station ok" title="station ok" width="24px" v-else>
             </td>
-            <td v-text="station.adress"></td>
-            <td v-text="station.nbBikes"></td>
-            <td v-text="station.nbSlots"></td>
             <td>
                 <img src="assets/cb.png" alt="cb" :title="[station.acceptCb ? 'cb' : 'no cb']" width="24px" :class="[station.acceptCb ? '' : 'grayscale']">
             </td>
