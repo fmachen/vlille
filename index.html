@@ -28,7 +28,7 @@
             <table>
                 <caption>{{ filteredStations.length }} stations</caption>
                 <tr>
-                    <th>favorite</th>
+                    <th></th>
                     <th>id</th>
                     <th>nom</th>
                     <th>etat</th>
@@ -46,7 +46,7 @@
     <template id="tpl-station">
         <tr :key="station.id">
             <td @click="favoriteUpdate(station)">
-                <img src="assets/favorite.png" alt="star" title="toggle favorite" width="16px" :class="[station.isFavorite() ? '' : 'grayscale']">
+                <img src="assets/favorite.png" alt="star" :title="[station.isFavorite() ? 'favorite' : 'no favorite']" width="24px" :class="[station.isFavorite() ? '' : 'grayscale']">
             </td>
             <td v-text="station.id"></td>
             <td v-text="station.name"></td>
@@ -54,7 +54,9 @@
             <td v-text="station.adress"></td>
             <td v-text="station.nbBikes"></td>
             <td v-text="station.nbSlots"></td>
-            <td v-text="station.acceptCb"></td>
+            <td>
+                <img src="assets/cb.png" alt="cb" :title="[station.acceptCb ? 'cb' : 'no cb']" width="24px" :class="[station.acceptCb ? '' : 'grayscale']">
+            </td>
             <td>{{ station.gps[0] }} - {{ station.gps[1] }}</td>
         </tr>
     </template>
