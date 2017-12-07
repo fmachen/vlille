@@ -21,7 +21,10 @@
         <section>
             <h1>Vlille</h1>
             <input type="search" v-model="filterSearch" placeholder="filter">
-            <input type="checkbox" v-model="filterFavorite">
+            <input type="checkbox" v-model="filterFavorite" id="filterFavorite">
+            <label for="filterFavorite">
+                <img src="assets/favorite.png" title="filter favorites" width="48px">
+            </label>
             <table>
                 <caption>{{ filteredStations.length }} stations</caption>
                 <tr>

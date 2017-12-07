@@ -70,3 +70,15 @@ caption{
     text-align:left;
     margin: .5rem 0;
 }
+
+#filterFavorite {
+    display: none;
+}
+
+#filterFavorite + label {
+    filter: grayscale(100);
+}
+
+#filterFavorite:checked + label {
+    filter: grayscale(0);
+}
