@@ -82,3 +82,7 @@ caption{
 #filterFavorite:checked + label {
     filter: grayscale(0);
 }
+
+.grayscale {
+    filter: grayscale(100);
+}

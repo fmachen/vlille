@@ -23,7 +23,7 @@
             <input type="search" v-model="filterSearch" placeholder="filter">
             <input type="checkbox" v-model="filterFavorite" id="filterFavorite">
             <label for="filterFavorite">
-                <img src="assets/favorite.png" title="filter favorites" width="48px">
+                <img src="assets/favorite.png" alt="star" title="filter favorites" width="48px">
             </label>
             <table>
                 <caption>{{ filteredStations.length }} stations</caption>
@@ -45,7 +45,9 @@
 
     <template id="tpl-station">
         <tr :key="station.id">
-            <td v-text="station.isFavorite()" @click="favoriteUpdate(station)"></td>
+            <td @click="favoriteUpdate(station)">
+                <img src="assets/favorite.png" alt="star" title="toggle favorite" width="16px" :class="[station.isFavorite() ? '' : 'grayscale']">
+            </td>
             <td v-text="station.id"></td>
             <td v-text="station.name"></td>
             <td v-text="station.state"></td>
