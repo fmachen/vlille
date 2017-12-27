@@ -21,8 +21,8 @@ class StationManager {
         station.name = json.fields.nom.replace(/^\d+ /, '').replace(' (CB)', '');
         station.state = json.fields.etat + '/' + json.fields.etatConnexion;
         station.adress = json.fields.adresse + ' ' + json.fields.commune;
-        station.nbBikes = json.fields.nbVelosDispo;
-        station.nbSlots = json.fields.nbPlacesDispo;
+        station.nbBikes = json.fields.nbvelosdispo;
+        station.nbSlots = json.fields.nbplacesdispo;
         station.acceptCb = json.fields.type === "AVEC TPE";
         station.gps = json.fields.geo;
         return station;
